@@ -23,7 +23,41 @@ asm_main:
         enter   0,0               ; setup routine
         pusha
 
-		; TODO: add code
+	 ; mov eax, -34
+        ; dump_regs 1
+        ;incorrect extension
+        ; mov eax,0
+        ; mov al, 0DEH
+        ; call print_int
+        ; call print_nl
+
+        ; correct extension
+        ; mov eax, -1
+        ; mov al, 0DEH
+        ; call print_int
+
+        mov eax, -1
+        mov ax, 045H
+        dump_regs 1
+        call print_nl
+        ;moving from smaller umber to bigger number with movzx
+        movzx eax,ax
+        dump_regs 2
+
+        ;incorrect beaucse it's a -ve number, for negative numbers use eax as -1
+        mov eax, -1
+        mov al, 00CH
+        call print_int
+        call print_nl
+
+        ;correct for positive number use eax as 0
+        mov eax, 0
+        mov al, 00CH
+        call print_int
+
+
+
+
 
         popa
         mov     eax, 0            ; return back to C

@@ -1,6 +1,4 @@
 
-
-;
 ; file: math.asm
 ; This program demonstrates how the integer multiplication and division
 ; instructions work.
@@ -14,8 +12,9 @@
 segment .data
 ;
 ; Output strings
-;
-prompt          db    "Enter a number: ", 0
+;TAKE IN A NUMBER
+prompt          db    "Enter your favorite: ", 0
+;SQUARE A NUMBER
 square_msg      db    "Square of input is ", 0
 cube_msg        db    "Cube of input is ", 0
 cube25_msg      db    "Cube of input times 25 is ", 0
@@ -24,6 +23,7 @@ rem_msg         db    "Remainder of cube/100 is ", 0
 neg_msg         db    "The negation of the remainder is ", 0
 
 segment .bss
+;TAKE IN AN INTEGER
 input   resd 1
 
 
@@ -33,27 +33,29 @@ asm_main:
         enter   0,0               ; setup routine
         pusha
 
-        mov     eax, prompt
-        call    print_string
+        mov     eax, prompt ;SETUP PROMPT
+        call    print_string ;PRINT PROMT
 
-        call    read_int
-        mov     [input], eax
-
+        call    read_int ; GET INT FROM USER
+        
+        mov     [input], eax ;SAVE USER INPUT IN [INPUT]
+         
+        ;squaring user input
         imul    eax               ; edx:eax = eax * eax
-        mov     ebx, eax          ; save answer in ebx
-        mov     eax, square_msg
-        call    print_string
-        mov     eax, ebx
-        call    print_int
-        call    print_nl
+        mov     ebx, eax          ; save answer in ebx cuz we r about to change the eax to the square message
+        mov     eax, square_msg   ;setup square message
+        call    print_string      ;print square message
+        mov     eax, ebx          ;eax=ebs
+        call    print_int         ;print squared number
+        call    print_nl          ;print newline
 
-        mov     ebx, eax
-        imul    ebx, [input]      ; ebx *= [input]
-        mov     eax, cube_msg
-        call    print_string
-        mov     eax, ebx
-        call    print_int
-        call    print_nl
+        mov     ebx, eax        ;ebx=eax -> number^2
+        imul    ebx, [input]    ; ebx *= [input] -> number^3
+        mov     eax, cube_msg   ;cube message
+        call    print_string    ;print cube message
+        mov     eax, ebx        ;eax=ebx
+        call    print_int       ; print number^3
+        call    print_nl        ;print a newline
 
         imul    ecx, ebx, 25      ; ecx = ebx*25
         mov     eax, cube25_msg
@@ -89,9 +91,3 @@ asm_main:
         mov     eax, 0            ; return back to C
         leave                     
         ret
-
-
-
-
-
-
