@@ -9,7 +9,7 @@ LDFLAGS := -m32
 CC		:= gcc
 CXX		:= g++
 CXXFLAGS := -m32
-TARGETS := accessing_stack_elements cake emoji_subprograms encode fac_and_fib flags happy_numbers lines math_magic1 math_magic2 number_operations reverse_string skeleton stack sub1 sub2 sub3 sub4
+TARGETS := accessing_stack_elements cake emoji_subprograms encode fac_and_fib flags happy_numbers lines math_magic1 math_magic2 number_operations reverse_string skeleton stack sub1 sub2 sub3 sub4 project5
 DEP := driver.o asm_io.o
 
 .PHONY: clean
@@ -55,8 +55,14 @@ sub3: $(DEP)
 
 sub4: $(DEP) main4.o
 
+project5: $(DEP)
+
+
 asm_io.o: asm_io.asm
 	$(AS) $(ASFLAGS) -d ELF_TYPE asm_io.asm
+
+project5.o: asm_io.inc
+
 
 accessing_stack_elements.o:asm_io.asm
 
